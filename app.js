@@ -7,9 +7,12 @@ buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (e.target.value == "=") {
       try {
-        displayValue = JSON.stringify(eval(displayValue));
+        // displayValue = JSON.stringify(eval(displayValue));
+        displayValue = JSON.stringify(
+          Math.round(eval(displayValue) * 100) / 100
+        );
         displayScreen();
-      } catch { 
+      } catch {
         displayValue = "ERROR";
         displayScreen();
       }
@@ -21,6 +24,7 @@ buttons.forEach((button) => {
       displayScreen();
     } else if (e.target.value == "+/-") {
       displayValue = parseInt(displayValue) * -1;
+      displayScreen();
     } else {
       displayValue += e.target.value;
       displayScreen();
@@ -32,7 +36,7 @@ const displayScreen = () => {
   if (displayValue == "ERROR") {
     display.style.color = "red";
     display.value = displayValue;
-} else {
+  } else {
     display.style.color = "white";
     display.value = displayValue;
   }
